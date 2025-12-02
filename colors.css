@@ -1,4 +1,10 @@
-
+head{
+        font-size: 100px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: gold;
+}
 body{
     font-size: 100px;
     justify-content: center;
