@@ -1,10 +1,4 @@
-head{
-        font-size: 100px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: gold;
-}
+
 body{
     font-size: 100px;
     justify-content: center;
@@ -15,7 +9,7 @@ body{
 }
 .multicolor-text {
   /* 1. Define a background gradient with multiple colors */
-  background-image: linear-gradient(to right, red,yellow, blue); /* Example: red to blue gradient */
+  background-image: radial-gradient(to right, red,yellow, blue); /* Example: red to blue gradient */
   
   /* 2. Clip the background to the text area */
   -webkit-background-clip: text; /* For compatibility with older browsers (Chrome, Safari) */
