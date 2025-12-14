@@ -1,4 +1,10 @@
-
+head{
+    font-size: 100px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color:gold;
+}
 body{
     font-size: 100px;
     justify-content: center;
@@ -7,18 +13,4 @@ body{
     color: gold;
     background-image: linear-gradient(90deg,red,orange,yellow,lime,cyan,blue,purple,indigo,violet,red);
 }
-.multicolor-text {
-  /* 1. Define a background gradient with multiple colors */
-  background-image: radial-gradient(to right,red,green,blue); /* Example: red to blue gradient */
-  
-  /* 2. Clip the background to the text area */
-  -webkit-background-clip: text; /* For compatibility with older browsers (Chrome, Safari) */
-  background-clip: text;
 
-  /* 3. Make the text itself transparent so the background shows through */
-  color: transparent;
-
-  /* Optional: Enhance the visual effect */
-  font-size: 64px; /* Larger, bolder text works best */
-  font-weight: bold;
-}
