@@ -3,7 +3,9 @@ head{
     justify-content: center;
     align-items: center;
     text-align: center;
-    color:gold;
+    color:black;
+    -webkit-text-stroke: 10px;
+    -webkit-text-stroke-color: white;
 }
 body{
     font-size: 100px;
