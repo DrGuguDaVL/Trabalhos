@@ -9,7 +9,7 @@ body{
 }
 .multicolor-text {
   /* 1. Define a background gradient with multiple colors */
-  background-image: radial-gradient(90deg,red,green,blue); /* Example: red to blue gradient */
+  background-image: radial-gradient(to right,red,green,blue); /* Example: red to blue gradient */
   
   /* 2. Clip the background to the text area */
   -webkit-background-clip: text; /* For compatibility with older browsers (Chrome, Safari) */
