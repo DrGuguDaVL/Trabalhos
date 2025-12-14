@@ -11,5 +11,5 @@ body{
     align-items: center;
     text-align: center;
     color: gold;
-    background-image: linear-gradient(90deg,cyan,blue);
+    background-image: linear-gradient(90deg,red,orange,yellow,lime,cyan,blue,purple,indigo,violet,red);
 }
