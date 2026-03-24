@@ -3,7 +3,7 @@ head{
     justify-content: center;
     align-items: center;
     text-align: center;
-    color:white;
+    color:black;
     -webkit-text-stroke: 10px;
     -webkit-text-stroke-color: white;
 }
@@ -26,12 +26,18 @@ body {
     /* Extra-wide gradient for smooth movement */
     background: linear-gradient(
         90deg,
+        red,
+        orange,
         yellow,
+        lime,
+        dodgerblue,
         blue,
+        purple,
+        magenta,
     );
 
     background-size: 400% 400%;
-    animation: rainbowMove 5s linear infinite;
+    animation: rainbowMove 2s linear infinite;
 }
 
 /* Animation */
