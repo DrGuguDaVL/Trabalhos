@@ -14,7 +14,7 @@ html,body {
     height: 100%;
 }
 
-body {
+body,head {
     display: flex;
     justify-content: center;
     align-items: center;
