@@ -3,6 +3,7 @@ head{
     justify-content: center;
     align-items: center;
     text-align: center;
+    background: linear-gradient(blue,yellow);
     color:black;
     -webkit-text-stroke: 10px;
     -webkit-text-stroke-color: white;
