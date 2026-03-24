@@ -26,18 +26,12 @@ body {
     /* Extra-wide gradient for smooth movement */
     background: linear-gradient(
         90deg,
-        red,
-        orange,
         yellow,
-        lime,
-        cyan,
         blue,
-        purple,
-        red
     );
 
     background-size: 400% 400%;
-    animation: rainbowMove 2s linear infinite;
+    animation: rainbowMove 5s linear infinite;
 }
 
 /* Animation */
