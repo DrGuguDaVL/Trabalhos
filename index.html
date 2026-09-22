@@ -1,8 +1,75 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-    <h1>SÍNDROME DE DOWN</h1>
-    <link rel="stylesheet" href="colors.css"> 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gustavo Rainbow</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background: linear-gradient(
+            90deg,
+            red,
+            orange,
+            yellow,
+            lime,
+            cyan,
+            blue,
+            violet,
+            magenta,
+            red
+        );
+
+        background-size: 400% 400%;
+        animation: rainbow 8s linear infinite;
+    }
+
+    .name {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 100px;
+        font-weight: 900;
+        color: white;
+
+        text-shadow:
+            0 0 10px rgba(0, 0, 0, 0.7),
+            0 0 25px rgba(0, 0, 0, 0.5);
+
+        z-index: 2;
+    }
+
+    @keyframes rainbow {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+</style>
 </head>
+
 <body>
 
+<div class="name">Gustavo</div>
+
 </body>
+</html>
