@@ -1,12 +1,15 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Festa de Encerramento</title>
 
 <style>
+
 * {
     margin: 0;
     padding: 0;
@@ -17,16 +20,27 @@ body {
     width: 100%;
     height: 100vh;
     overflow: hidden;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
     font-family: Arial, Helvetica, sans-serif;
 
     background: linear-gradient(
         90deg,
-        red, orange, yellow, chartreuse,
-        lime, springgreen, cyan, dodgerblue,
-        blue, blueviolet, magenta, #FF007F
+        red,
+        orange,
+        yellow,
+        chartreuse,
+        lime,
+        springgreen,
+        cyan,
+        dodgerblue,
+        blue,
+        blueviolet,
+        magenta,
+        #FF007F
     );
 
     background-size: 400% 400%;
@@ -34,16 +48,27 @@ body {
 }
 
 @keyframes rainbow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .container {
     width: 95%;
     text-align: center;
     color: black;
-    text-shadow: 0 0 15px rgba(0,0,0,.5);
+
+    text-shadow:
+        0 0 10px rgba(0,0,0,.5),
+        0 0 25px rgba(0,0,0,.3);
 }
 
 h1 {
@@ -54,6 +79,7 @@ h1 {
 h2 {
     font-size: clamp(22px, 5vw, 55px);
     margin-bottom: 25px;
+    font-weight: 900;
 }
 
 .name {
@@ -85,6 +111,7 @@ h2 {
         opacity: 0;
         transform: translateY(60px) scale(.7);
     }
+
     to {
         opacity: 1;
         transform: translateY(0) scale(1);
@@ -96,95 +123,229 @@ h2 {
         opacity: 0;
         transform: scale(.2);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
     }
 }
+
+/* MUSIC CONTROL */
+
+.music-control {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+    padding: 12px 18px;
+    border: 2px solid rgba(0,0,0,.4);
+    border-radius: 30px;
+
+    background: rgba(255,255,255,.35);
+    color: black;
+
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.music-control:hover {
+    background: rgba(255,255,255,.65);
+}
+
 </style>
+
 </head>
 
 <body>
 
+<!-- ================================== -->
+<!-- MUSIC FILE                         -->
+<!-- ================================== -->
+
+<audio id="backgroundMusic" loop preload="auto">
+
+    <!-- PUT YOUR MUSIC FILE HERE -->
+    <source
+        src="music/viva-la-vida.mp3"
+        type="audio/mpeg"
+    >
+
+</audio>
+
+<!-- ================================== -->
+<!-- PRESENTATION SCREENS                -->
+<!-- ================================== -->
+
 <div class="container">
 
+    <!-- OPENING -->
+
     <div id="intro">
-        <h1 class="animate">FESTA DE<br>ENCERRAMENTO</h1>
-        <p class="subtitle">Um momento especial para celebrar!</p>
+        <h1 class="animate">
+            FESTA DE<br>
+            ENCERRAMENTO
+        </h1>
+
+        <p class="subtitle">
+            Um momento especial para celebrar!
+        </p>
     </div>
+
+
+    <!-- STUDENTS -->
 
     <div id="thanks" class="hidden">
+
         <h2 id="heading"></h2>
+
         <div id="student" class="name"></div>
+
         <div id="classroom" class="classroom"></div>
-        <p class="subtitle">Vocês fizeram parte dessa história!</p>
+
+        <p class="subtitle">
+            Vocês fizeram parte dessa história!
+        </p>
+
     </div>
+
+
+    <!-- MORE STUDENTS -->
 
     <div id="more" class="hidden">
-        <h1 class="animate">E MAIS OUTROS!</h1>
-        <p class="subtitle">Cada estudante fez parte dessa história!</p>
+
+        <h1 class="animate">
+            E MAIS OUTROS!
+        </h1>
+
+        <p class="subtitle">
+            Cada estudante fez parte dessa história!
+        </p>
+
     </div>
 
+
+    <!-- FINAL SCREEN -->
+
     <div id="final" class="hidden">
-        <h1 class="animate">OBRIGADO!</h1>
+
+        <h1 class="animate">
+            OBRIGADO!
+        </h1>
+
         <p class="subtitle">
             Nossa história não seria a mesma sem vocês!
             <br><br>
             Boas férias e até a próxima!
         </p>
+
     </div>
 
 </div>
 
+
+<!-- MUSIC BUTTON -->
+
+<button class="music-control" id="musicButton">
+    ♪ Ativar música
+</button>
+
+
 <script>
+
+// ==================================
+// STUDENT LIST
+// ==================================
+
 const students = [
+
+    // 8A
     { name: "Alex", classroom: "8A" },
     { name: "Guilherme", classroom: "8A" },
     { name: "Hemanoelle", classroom: "8A" },
     { name: "Jamilly", classroom: "8A" },
 
+    // 8B
     { name: "Daniel", classroom: "8B" },
     { name: "Lucas", classroom: "8B" },
     { name: "Nicolas", classroom: "8B" },
 
+    // 9A
     { name: "Kaiky", classroom: "9A" },
+
+    // 9B
     { name: "Georgio", classroom: "9B" },
 
+    // 1A
     { name: "Gabriel", classroom: "1A" },
     { name: "Haifa", classroom: "1A" },
     { name: "Heverton", classroom: "1A" },
+
+    // 1D
     { name: "Christopher", classroom: "1D" },
 
+    // 2A
     { name: "Ana Vitória", classroom: "2A" },
     { name: "Anibelle", classroom: "2A" },
     { name: "Jhenny", classroom: "2A" },
-    { name: "Julia", classroom: "2B" },
+
+
+    // 2C
     { name: "Anderson", classroom: "2C" },
     { name: "Ketlin", classroom: "2C" },
+    
+    // 2D
+    { name: "Julia", classroom: "2D" },
 
+    // 3A
     { name: "André", classroom: "3A" },
     { name: "Barbara", classroom: "3A" },
     { name: "Calvin", classroom: "3A" },
     { name: "Leandro", classroom: "3A" },
     { name: "João Pedro", classroom: "3A" },
     { name: "Sarah", classroom: "3A" },
+
+    // 3C
     { name: "Gustavo", classroom: "3C" }
+
 ];
 
+
+// ==================================
+// CLASSROOM ORDER
+// ==================================
+
 const classroomOrder = [
-    "8A", "8B", "9A", "9B",
-    "1A", "1D", "2A", "2B", "2C",
-    "3A", "3C"
+    "8A",
+    "8B",
+    "9A",
+    "9B",
+    "1A",
+    "1D",
+    "2A",
+    "2C",
+    "2D",
+    "3A",
+    "3C"
 ];
 
 students.sort((a, b) => {
+
     const classA = classroomOrder.indexOf(a.classroom);
     const classB = classroomOrder.indexOf(b.classroom);
 
-    if (classA !== classB) return classA - classB;
+    if (classA !== classB) {
+        return classA - classB;
+    }
 
     return a.name.localeCompare(b.name, "pt-BR");
+
 });
+
+
+// ==================================
+// ELEMENTS
+// ==================================
 
 const intro = document.getElementById("intro");
 const thanks = document.getElementById("thanks");
@@ -195,71 +356,193 @@ const heading = document.getElementById("heading");
 const student = document.getElementById("student");
 const classroom = document.getElementById("classroom");
 
+const music = document.getElementById("backgroundMusic");
+const musicButton = document.getElementById("musicButton");
+
 let index = 0;
 let currentClass = "";
+let presentationTimer;
+
+
+// ==================================
+// MUSIC SYSTEM
+// ==================================
+
+music.volume = 0.5;
+
+async function startMusic() {
+
+    try {
+
+        await music.play();
+
+        musicButton.textContent = "♪ Música ativada";
+
+    } catch (error) {
+
+        musicButton.textContent = "♪ Tentar novamente";
+
+    }
+
+}
+
+musicButton.addEventListener("click", startMusic);
+
+
+// ==================================
+// ANIMATION SYSTEM
+// ==================================
 
 function animateElement(element) {
+
     element.classList.remove("animate");
+
     void element.offsetWidth;
+
     element.classList.add("animate");
+
 }
+
+
+// ==================================
+// SHOW STUDENTS
+// ==================================
 
 function showStudent() {
 
+    // END OF STUDENT LIST
+
     if (index >= students.length) {
+
         thanks.classList.add("hidden");
+
         more.classList.remove("hidden");
 
-        setTimeout(() => {
+        animateElement(more.querySelector("h1"));
+
+        presentationTimer = setTimeout(() => {
+
             more.classList.add("hidden");
+
             final.classList.remove("hidden");
+
+            animateElement(final.querySelector("h1"));
+
+            presentationTimer = setTimeout(
+                restartPresentation,
+                5000
+            );
+
         }, 4000);
 
         return;
+
     }
+
 
     const current = students[index];
 
-    // Introduce a new classroom
+
+    // CLASSROOM INTRODUCTION
+
     if (current.classroom !== currentClass) {
+
         currentClass = current.classroom;
 
         student.textContent = "";
         classroom.textContent = "";
 
-        heading.textContent = "ALUNOS DO " + currentClass;
-
         student.classList.add("hidden");
         classroom.classList.add("hidden");
 
+        heading.textContent =
+            "ALUNOS DO " + currentClass;
+
         animateElement(heading);
 
-        setTimeout(() => {
+        presentationTimer = setTimeout(() => {
+
             student.classList.remove("hidden");
+
             classroom.classList.remove("hidden");
+
             showStudent();
+
         }, 2200);
 
         return;
+
     }
 
+
+    // INDIVIDUAL STUDENT
+
     student.textContent = current.name;
-    classroom.textContent = "Turma " + current.classroom;
+
+    classroom.textContent =
+        "Turma " + current.classroom;
 
     animateElement(student);
+
     animateElement(classroom);
 
     index++;
 
-    setTimeout(showStudent, 2500);
+    presentationTimer = setTimeout(
+        showStudent,
+        2500
+    );
+
 }
 
+
+// ==================================
+// INFINITE LOOP
+// ==================================
+
+function restartPresentation() {
+
+    clearTimeout(presentationTimer);
+
+    final.classList.add("hidden");
+
+    more.classList.add("hidden");
+
+    thanks.classList.add("hidden");
+
+    intro.classList.remove("hidden");
+
+    animateElement(intro.querySelector("h1"));
+
+    index = 0;
+
+    currentClass = "";
+
+    presentationTimer = setTimeout(() => {
+
+        intro.classList.add("hidden");
+
+        thanks.classList.remove("hidden");
+
+        showStudent();
+
+    }, 4000);
+
+}
+
+
+// ==================================
 // START PRESENTATION
-setTimeout(() => {
+// ==================================
+
+presentationTimer = setTimeout(() => {
+
     intro.classList.add("hidden");
+
     thanks.classList.remove("hidden");
 
     showStudent();
+
 }, 4000);
 
 </script>
