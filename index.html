@@ -14,7 +14,7 @@
 }
 
 body {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     overflow: hidden;
     display: flex;
@@ -24,7 +24,9 @@ body {
 
     background: linear-gradient(
         90deg,
-        red, orange, yellow, chartreuse, lime, springgreen, cyan, dodgerblue, blue, blueviolet, magenta, #FF007F
+        red, orange, yellow, chartreuse,
+        lime, springgreen, cyan, dodgerblue,
+        blue, blueviolet, magenta, #FF007F
     );
 
     background-size: 400% 400%;
@@ -38,8 +40,8 @@ body {
 }
 
 .container {
-    text-align: center;
     width: 95%;
+    text-align: center;
     color: black;
     text-shadow: 0 0 15px rgba(0,0,0,.5);
 }
@@ -47,7 +49,6 @@ body {
 h1 {
     font-size: clamp(35px, 8vw, 100px);
     font-weight: 900;
-    animation: zoom 1.5s ease;
 }
 
 h2 {
@@ -58,14 +59,12 @@ h2 {
 .name {
     font-size: clamp(35px, 7vw, 85px);
     font-weight: 900;
-    animation: appear 1s ease;
 }
 
 .classroom {
     font-size: clamp(24px, 4vw, 45px);
     font-weight: bold;
     margin-top: 12px;
-    animation: appear 1s ease;
 }
 
 .subtitle {
@@ -74,7 +73,11 @@ h2 {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
+}
+
+.animate {
+    animation: appear 1s ease;
 }
 
 @keyframes appear {
@@ -106,26 +109,24 @@ h2 {
 <div class="container">
 
     <div id="intro">
-        <h1>FESTA DE<br>ENCERRAMENTO</h1>
+        <h1 class="animate">FESTA DE<br>ENCERRAMENTO</h1>
         <p class="subtitle">Um momento especial para celebrar!</p>
     </div>
 
     <div id="thanks" class="hidden">
-        <h2>OBRIGADO AOS NOSSOS ESTUDANTES!</h2>
+        <h2 id="heading"></h2>
         <div id="student" class="name"></div>
         <div id="classroom" class="classroom"></div>
         <p class="subtitle">Vocês fizeram parte dessa história!</p>
     </div>
 
     <div id="more" class="hidden">
-        <h1>E MAIS OUTROS!</h1>
-        <p class="subtitle">
-            Cada estudante fez parte dessa história!
-        </p>
+        <h1 class="animate">E MAIS OUTROS!</h1>
+        <p class="subtitle">Cada estudante fez parte dessa história!</p>
     </div>
 
     <div id="final" class="hidden">
-        <h1>OBRIGADO!</h1>
+        <h1 class="animate">OBRIGADO!</h1>
         <p class="subtitle">
             Nossa história não seria a mesma sem vocês!
             <br><br>
@@ -136,13 +137,12 @@ h2 {
 </div>
 
 <script>
-
-
 const students = [
     { name: "Alex", classroom: "8A" },
     { name: "Guilherme", classroom: "8A" },
     { name: "Hemanoelle", classroom: "8A" },
     { name: "Jamilly", classroom: "8A" },
+
     { name: "Daniel", classroom: "8B" },
     { name: "Lucas", classroom: "8B" },
     { name: "Nicolas", classroom: "8B" },
@@ -157,25 +157,21 @@ const students = [
 
     { name: "Ana Vitória", classroom: "2A" },
     { name: "Anibelle", classroom: "2A" },
-    { name: "Jhenny", classroom: "2A" },
+    { name: "Julia", classroom: "2A" },
     { name: "Julia", classroom: "2B" },
     { name: "Anderson", classroom: "2C" },
     { name: "Ketlin", classroom: "2C" },
 
     { name: "André", classroom: "3A" },
-    { name: "Barbara", classroom: "3A" }
-    { name: "Calvin", classroom: "3A" },
+    { name: "Barbara", classroom: "3A" },
     { name: "João Pedro", classroom: "3A" },
-    { name: "Leandro", classroom: "3A" },
     { name: "Sarah", classroom: "3A" },
     { name: "Gustavo", classroom: "3C" }
 ];
 
 const classroomOrder = [
-    "8A", "8B",
-    "9A", "9B",
-    "1A", "1D",
-    "2A", "2B", "2C",
+    "8A", "8B", "9A", "9B",
+    "1A", "1D", "2A", "2B", "2C",
     "3A", "3C"
 ];
 
@@ -193,12 +189,18 @@ const thanks = document.getElementById("thanks");
 const more = document.getElementById("more");
 const final = document.getElementById("final");
 
+const heading = document.getElementById("heading");
 const student = document.getElementById("student");
 const classroom = document.getElementById("classroom");
-const heading = document.querySelector("#thanks h2");
 
 let index = 0;
 let currentClass = "";
+
+function animateElement(element) {
+    element.classList.remove("animate");
+    void element.offsetWidth;
+    element.classList.add("animate");
+}
 
 function showStudent() {
 
@@ -214,51 +216,47 @@ function showStudent() {
         return;
     }
 
-    const currentStudent = students[index];
+    const current = students[index];
 
-    // Introdução de cada turma
-    if (currentStudent.classroom !== currentClass) {
+    // Introduce a new classroom
+    if (current.classroom !== currentClass) {
+        currentClass = current.classroom;
 
-        currentClass = currentStudent.classroom;
-
-        student.style.display = "none";
-        classroom.style.display = "none";
+        student.textContent = "";
+        classroom.textContent = "";
 
         heading.textContent = "ALUNOS DO " + currentClass;
 
-        heading.style.animation = "none";
-        void heading.offsetWidth;
-        heading.style.animation = "zoom 1.5s ease";
+        student.classList.add("hidden");
+        classroom.classList.add("hidden");
+
+        animateElement(heading);
 
         setTimeout(() => {
-            student.style.display = "block";
-            classroom.style.display = "block";
+            student.classList.remove("hidden");
+            classroom.classList.remove("hidden");
             showStudent();
         }, 2200);
 
         return;
     }
 
-    student.style.animation = "none";
-    classroom.style.animation = "none";
+    student.textContent = current.name;
+    classroom.textContent = "Turma " + current.classroom;
 
-    void student.offsetWidth;
-    void classroom.offsetWidth;
-
-    student.textContent = currentStudent.name;
-    classroom.textContent = "Turma " + currentStudent.classroom;
-
-    student.style.animation = "appear 1s ease";
-    classroom.style.animation = "appear 1s ease";
+    animateElement(student);
+    animateElement(classroom);
 
     index++;
 
     setTimeout(showStudent, 2500);
 }
 
+// START PRESENTATION
 setTimeout(() => {
     intro.classList.add("hidden");
     thanks.classList.remove("hidden");
+
     showStudent();
 }, 4000);
 
