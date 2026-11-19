@@ -1,75 +1,241 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gustavo Rainbow</title>
+<title>Festa de Encerramento</title>
 
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: linear-gradient(
+        90deg,
+        red, orange, yellow, lime,
+        cyan, blue, violet, magenta, red
+    );
+
+    background-size: 400% 400%;
+    animation: rainbow 8s linear infinite;
+}
+
+@keyframes rainbow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    text-align: center;
+    width: 95%;
+    color: black;
+    text-shadow: 0 0 15px rgba(0,0,0,.5);
+}
+
+h1 {
+    font-size: clamp(35px, 8vw, 100px);
+    font-weight: 900;
+    animation: zoom 1.5s ease;
+}
+
+h2 {
+    font-size: clamp(22px, 5vw, 55px);
+    margin-bottom: 25px;
+}
+
+.name {
+    font-size: clamp(35px, 7vw, 85px);
+    font-weight: 900;
+    animation: appear 1s ease;
+}
+
+.classroom {
+    font-size: clamp(24px, 4vw, 45px);
+    font-weight: bold;
+    margin-top: 12px;
+    animation: appear 1s ease;
+}
+
+.subtitle {
+    font-size: clamp(16px, 3vw, 30px);
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(60px) scale(.7);
     }
-
-    body {
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        background: linear-gradient(
-            90deg,
-            red,
-            orange,
-            yellow,
-            lime,
-            cyan,
-            blue,
-            violet,
-            magenta,
-            red
-        );
-
-        background-size: 400% 400%;
-        animation: rainbow 8s linear infinite;
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
+}
 
-    .name {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 100px;
-        font-weight: 900;
-        color: black;
-
-        text-shadow:
-            0 0 10px rgba(0, 0, 0, 0.7),
-            0 0 25px rgba(0, 0, 0, 0.5);
-
-        z-index: 2;
+@keyframes zoom {
+    from {
+        opacity: 0;
+        transform: scale(.2);
     }
-
-    @keyframes rainbow {
-        0% {
-            background-position: 0% 50%;
-        }
-
-        50% {
-            background-position: 100% 50%;
-        }
-
-        100% {
-            background-position: 0% 50%;
-        }
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
+}
 </style>
 </head>
 
 <body>
 
-<div class="name">GUSTAVO</div>
+<div class="container">
+
+    <div id="intro">
+        <h1>FESTA DE<br>ENCERRAMENTO</h1>
+        <p class="subtitle">Um momento especial para celebrar!</p>
+    </div>
+
+    <div id="thanks" class="hidden">
+        <h2>OBRIGADO AOS NOSSOS ESTUDANTES!</h2>
+        <div id="student" class="name"></div>
+        <div id="classroom" class="classroom"></div>
+        <p class="subtitle">Vocês fizeram parte dessa história!</p>
+    </div>
+
+    <div id="more" class="hidden">
+        <h1>E MAIS OUTROS!</h1>
+        <p class="subtitle">
+            Cada estudante fez parte dessa história!
+        </p>
+    </div>
+
+    <div id="final" class="hidden">
+        <h1>OBRIGADO!</h1>
+        <p class="subtitle">
+            Nossa história não seria a mesma sem vocês!
+            <br><br>
+            Boas férias e até a próxima!
+        </p>
+    </div>
+
+</div>
+
+<script>
+
+const students = [
+    // 8º ano
+    { name: "Alex", classroom: "8A" },
+    { name: "Guilherme", classroom: "8A" },
+    { name: "Hemanoelle", classroom: "8A" },
+    { name: "Jamilly", classroom: "8A" },
+    { name: "Lucas", classroom: "8B" },
+    { name: "Daniel", classroom: "8B" },
+    { name: "Nicolas", classroom: "8B" },
+
+    // 9º ano
+    { name: "Georgio", classroom: "9B" },
+    { name: "Kaiky", classroom: "9A" },
+
+    // 1º ano
+    { name: "Gabriel", classroom: "1A" },
+    { name: "Haifa", classroom: "1A" },
+    { name: "Heverton", classroom: "1A" },
+    { name: "Christopher", classroom: "1D" },
+
+    // 2º ano
+    { name: "Ana Vitória", classroom: "2A" },
+    { name: "Anibelle", classroom: "2A" },
+    { name: "Julia", classroom: "2A" },
+    { name: "Anderson", classroom: "2C" },
+    { name: "Ketlin", classroom: "2C" },
+    { name: "Julia", classroom: "2B" },
+
+    // 3º ano
+    { name: "André", classroom: "3A" },
+    { name: "Barbara", classroom: "3A" },
+    { name: "João Pedro", classroom: "3A" },
+    { name: "Sarah", classroom: "3A" },
+    { name: "Gustavo", classroom: "3C" }
+];
+
+// Ordenação das turmas
+const classroomOrder = ["8", "9", "1", "2", "3"];
+
+students.sort((a, b) => {
+    const classA = classroomOrder.indexOf(a.classroom[0]);
+    const classB = classroomOrder.indexOf(b.classroom[0]);
+
+    if (classA !== classB) return classA - classB;
+
+    return a.name.localeCompare(b.name, "pt-BR");
+});
+
+const intro = document.getElementById("intro");
+const thanks = document.getElementById("thanks");
+const more = document.getElementById("more");
+const final = document.getElementById("final");
+
+const student = document.getElementById("student");
+const classroom = document.getElementById("classroom");
+
+let index = 0;
+
+setTimeout(() => {
+    intro.classList.add("hidden");
+    thanks.classList.remove("hidden");
+
+    showStudent();
+}, 4000);
+
+function showStudent() {
+
+    if (index < students.length) {
+
+        student.style.animation = "none";
+        classroom.style.animation = "none";
+
+        void student.offsetWidth;
+        void classroom.offsetWidth;
+
+        student.textContent = students[index].name;
+        classroom.textContent = "Turma " + students[index].classroom;
+
+        student.style.animation = "appear 1s ease";
+        classroom.style.animation = "appear 1s ease";
+
+        index++;
+
+        setTimeout(showStudent, 2500);
+
+    } else {
+
+        thanks.classList.add("hidden");
+        more.classList.remove("hidden");
+
+        setTimeout(() => {
+            more.classList.add("hidden");
+            final.classList.remove("hidden");
+        }, 4000);
+    }
+}
+
+</script>
 
 </body>
 </html>
